@@ -5,29 +5,39 @@ import (
 )
 
 func TestCleanInput(t *testing.T) {
-	tests := []struct {
-		name  string
-		input string
-		want  []string
+	cases := []struct {
+		input    string
+		expected []string
 	}{
-		{name: "first", input: " hello world ", want: []string{"hello", "world"}},
-		{name: "second", input: " Hello world ", want: []string{"hello", "world"}},
-		{name: "third", input: " Hello World ", want: []string{"hello", "world"}},
-		{name: "fourth", input: " ", want: nil},
-		{name: "fifth", input: "", want: nil},
-		// more cases as follows
+		{
+			input:    "  ",
+			expected: []string{},
+		},
+		{
+			input:    "  hello  ",
+			expected: []string{"hello"},
+		},
+		{
+			input:    "  hello  world  ",
+			expected: []string{"hello", "world"},
+		},
+		{
+			input:    "  HellO  World  ",
+			expected: []string{"hello", "world"},
+		},
 	}
 
-	for _, c := range tests {
-		got := cleanInput(c.input)
-		if len(c.want) != len(got) {
-			t.Fatalf("%s: expected %v, got: %v", c.name, c.want, got)
+	for _, c := range cases {
+		actual := cleanInput(c.input)
+		if len(actual) != len(c.expected) {
+			t.Errorf("lengths don't match: '%v' vs '%v'", actual, c.expected)
+			continue
 		}
-		for i := range got {
-			word := got[i]
-			wantedWord := c.want[i]
-			if word != wantedWord {
-				t.Fatalf("%s: expected %v, got: %v", c.name, c.want, got)
+		for i := range actual {
+			word := actual[i]
+			expectedWord := c.expected[i]
+			if word != expectedWord {
+				t.Errorf("cleanInput(%v) == %v, expected %v", c.input, actual, c.expected)
 			}
 		}
 	}
