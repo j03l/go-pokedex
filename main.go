@@ -14,8 +14,8 @@ type cliCommand struct {
 func main() {
 	err := callRepl()
 	if err != nil {
-		os.Exit(0)
-	} else {
 		fmt.Println(err)
+	} else {
+		os.Exit(0)
 	}
 }
