@@ -1,8 +1,8 @@
-package main
+package pokeapi
 
 import "fmt"
 
-func (api *PokeApi) commandMapb() error {
+func (api *LocationsAreaApi) commandMapb() error {
 	url := "https://pokeapi.co/api/v2/location/"
 	if api.Previous != "" {
 		url = api.Previous

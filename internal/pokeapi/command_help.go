@@ -1,12 +1,12 @@
-package main
+package pokeapi
 
 import (
 	"fmt"
 )
 
-func (api *PokeApi) commandHelp() error {
+func (api *LocationsAreaApi) commandHelp() error {
 	fmt.Print("Welcome to the Pokedex!\n\nUsage:\n")
-	for _, cmd := range api.getCommands() {
+	for _, cmd := range api.GetCommands() {
 		fmt.Printf("%s: %s\n", cmd.name, cmd.description)
 	}
 	return nil

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/j03l/go-pokedex/internal/pokeapi"
 )
 
 func cleanInput(text string) []string {
@@ -12,34 +14,9 @@ func cleanInput(text string) []string {
 	return cleanedSlice
 }
 
-func (api *PokeApi) getCommands() map[string]cliCommand {
-	return map[string]cliCommand{
-		"exit": {
-			name:        "exit",
-			description: "Exit the program",
-			callback:    api.commandExit,
-		},
-		"help": {
-			name:        "help",
-			description: "Displays a help message",
-			callback:    api.commandHelp,
-		},
-		"map": {
-			name:        "map",
-			description: "Displays 20 names of Pokemon locations",
-			callback:    api.commandMap,
-		},
-		"mapb": {
-			name:        "mapb",
-			description: "Displays the previous 20 names of Pokemon locations",
-			callback:    api.commandMapb,
-		},
-	}
-}
-
 func callRepl() error {
 	scanner := bufio.NewScanner(os.Stdin)
-	api := new(PokeApi)
+	api := new(pokeapi.LocationsAreaApi) // just locations for now
 
 	for {
 		fmt.Print("Pokedex > ")
@@ -52,12 +29,12 @@ func callRepl() error {
 
 		cmdName := text[0]
 
-		cmd, ok := api.getCommands()[cmdName]
+		cmd, ok := api.GetCommands()[cmdName]
 		if !ok {
 			fmt.Println("Unknown command")
 			continue
 		} else {
-			err := cmd.callback()
+			err := cmd.Callback()
 			if err != nil {
 				return err
 			}

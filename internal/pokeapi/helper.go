@@ -1,8 +1,6 @@
-package main
+package pokeapi
 
-import (
-	"net/http"
-)
+import "net/http"
 
 func getStatusCode(url string) (int, error) {
 	res, err := http.Get(url)

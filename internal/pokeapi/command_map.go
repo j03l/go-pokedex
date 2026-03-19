@@ -1,4 +1,4 @@
-package main
+package pokeapi
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (api *PokeApi) commandMap() error {
+func (api *LocationsAreaApi) commandMap() error {
 	url := "https://pokeapi.co/api/v2/location-area/"
 	if api.Next != "" {
 		url = api.Next
@@ -15,7 +15,7 @@ func (api *PokeApi) commandMap() error {
 	return api.getMap(url)
 }
 
-func (api *PokeApi) getMap(url string) error {
+func (api *LocationsAreaApi) getMap(url string) error {
 	res, err := http.Get(url)
 	if err != nil {
 		return fmt.Errorf("Failed to request to PokeAPI: %w", err)
