@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/j03l/go-pokedex/internal/pokeapi"
+	"github.com/j03l/go-pokedex/internal/pokecache"
 )
 
 func cleanInput(text string) []string {
@@ -17,6 +19,9 @@ func cleanInput(text string) []string {
 func callRepl() error {
 	scanner := bufio.NewScanner(os.Stdin)
 	api := new(pokeapi.LocationsAreaApi) // just locations for now
+
+	interval := time.Second * 10
+	api.Cache = pokecache.NewCache(interval)
 
 	for {
 		fmt.Print("Pokedex > ")
