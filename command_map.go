@@ -8,7 +8,7 @@ import (
 )
 
 func (api *PokeApi) commandMap() error {
-	url := "https://pokeapi.co/api/v2/location/"
+	url := "https://pokeapi.co/api/v2/location-area/"
 	if api.Next != "" {
 		url = api.Next
 	}
