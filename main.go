@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	fmt.Println("Hello world")
+	output := cleanInput("Testing 1 2 3")
+	fmt.Printf("%q\n", output)
+	fmt.Println("Hello, World!")
 }
