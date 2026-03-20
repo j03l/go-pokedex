@@ -2,13 +2,20 @@ package pokeapi
 
 import "fmt"
 
-func (api *LocationsAreaApi) commandMapb() error {
+func (api *LocationArea) commandMapb(args ...string) error {
 	url := "https://pokeapi.co/api/v2/location/"
 	if api.Previous != "" {
 		url = api.Previous
 	} else {
-		fmt.Println("you're on the first page")
-		return nil
+		return fmt.Errorf("you're on the first page")
 	}
-	return api.getMap(url)
+
+	err := api.cacheCheck(url)
+	if err != nil {
+		return err
+	}
+	for _, location := range api.Location {
+		fmt.Println(location.Name)
+	}
+	return nil
 }

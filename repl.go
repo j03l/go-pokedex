@@ -16,9 +16,9 @@ func cleanInput(text string) []string {
 	return cleanedSlice
 }
 
-func callRepl() error {
+func callRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
-	api := new(pokeapi.LocationsAreaApi) // just locations for now
+	api := new(pokeapi.LocationArea) // just locations for now
 
 	interval := time.Minute * 5
 	api.Cache = pokecache.NewCache(interval)
@@ -27,22 +27,21 @@ func callRepl() error {
 		fmt.Print("Pokedex > ")
 		scanner.Scan()
 
-		text := cleanInput(scanner.Text())
-		if len(text) == 0 {
+		args := cleanInput(scanner.Text())
+		if len(args) == 0 {
 			continue
 		}
 
-		cmdName := text[0]
-
+		cmdName := args[0]
 		cmd, ok := api.GetCommands()[cmdName]
 		if !ok {
 			fmt.Println("Unknown command")
 			continue
-		} else {
-			err := cmd.Callback()
-			if err != nil {
-				return err
-			}
+		}
+		err := cmd.Callback(args[1:]...)
+		if err != nil {
+			fmt.Println(err)
+			continue // handle all errors inside repl
 		}
 	}
 }
