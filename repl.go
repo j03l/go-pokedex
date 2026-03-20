@@ -20,7 +20,7 @@ func callRepl() error {
 	scanner := bufio.NewScanner(os.Stdin)
 	api := new(pokeapi.LocationsAreaApi) // just locations for now
 
-	interval := time.Second * 10
+	interval := time.Minute * 5
 	api.Cache = pokecache.NewCache(interval)
 
 	for {
