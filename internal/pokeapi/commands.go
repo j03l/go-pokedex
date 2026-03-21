@@ -50,6 +50,11 @@ func (api *PokeAPI) GetCommands() map[string]cliCommand {
 			description: "Inspect a caught Pokemon",
 			Callback:    api.commandInspect,
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Inspect all caught Pokemon in your Pokedex",
+			Callback:    api.commandPokedex,
+		},
 	}
 }
 
