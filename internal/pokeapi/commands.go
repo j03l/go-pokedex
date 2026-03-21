@@ -13,7 +13,7 @@ type cliCommand struct {
 	Callback    func(args ...string) error
 }
 
-func (api *LocationArea) GetCommands() map[string]cliCommand {
+func (api *PokeAPI) GetCommands() map[string]cliCommand {
 	return map[string]cliCommand{
 		"exit": {
 			name:        "exit",
@@ -45,10 +45,15 @@ func (api *LocationArea) GetCommands() map[string]cliCommand {
 			description: "Catch a Pokemon and add it to your Pokedex",
 			Callback:    api.commandCatch,
 		},
+		"inspect": {
+			name:        "inspect",
+			description: "Inspect a caught Pokemon",
+			Callback:    api.commandInspect,
+		},
 	}
 }
 
-func (api *LocationArea) cacheCheck(url string) error {
+func (api *PokeAPI) cacheCheck(url string) error {
 	cacheHit, cached := api.Cache.Get(url)
 	if cached {
 		if err := json.Unmarshal(cacheHit, api); err != nil {

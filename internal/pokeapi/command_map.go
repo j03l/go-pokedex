@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func (api *LocationArea) commandMap(args ...string) error {
+func (api *PokeAPI) commandMap(args ...string) error {
 	url := "https://pokeapi.co/api/v2/location-area/"
 	if api.Next != "" {
 		url = api.Next

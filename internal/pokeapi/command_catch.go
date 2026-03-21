@@ -5,12 +5,7 @@ import (
 	"math/rand"
 )
 
-type Pokemon struct {
-	Name           string `json:"name"`
-	BaseExperience int    `json:"base_experience"`
-}
-
-func (api *LocationArea) commandCatch(args ...string) error {
+func (api *PokeAPI) commandCatch(args ...string) error {
 	if len(args) == 0 {
 		return fmt.Errorf("A Pokemon name is required.")
 	}
@@ -28,7 +23,7 @@ func (api *LocationArea) commandCatch(args ...string) error {
 	if rng > 50 {                                  // TODO: pokeball will modify this
 		fmt.Printf("%s escaped!\n", namedPokemon)
 	} else {
-
+		api.CaughtPokemon[namedPokemon] = caughtPokemon // saved to Pokedex
 		fmt.Printf("%s was caught!\n", namedPokemon)
 	}
 	return nil

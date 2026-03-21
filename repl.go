@@ -18,7 +18,8 @@ func cleanInput(text string) []string {
 
 func callRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
-	api := new(pokeapi.LocationArea) // just locations for now
+	api := new(pokeapi.PokeAPI)
+	api.CaughtPokemon = make(map[string]pokeapi.Pokemon)
 
 	interval := time.Minute * 5
 	api.Cache = pokecache.NewCache(interval)

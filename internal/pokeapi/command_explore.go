@@ -2,7 +2,7 @@ package pokeapi
 
 import "fmt"
 
-func (api *LocationArea) commandExplore(args ...string) error {
+func (api *PokeAPI) commandExplore(args ...string) error {
 	if len(args) == 0 {
 		return fmt.Errorf("A location name is required.")
 	}

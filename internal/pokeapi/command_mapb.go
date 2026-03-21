@@ -2,7 +2,7 @@ package pokeapi
 
 import "fmt"
 
-func (api *LocationArea) commandMapb(args ...string) error {
+func (api *PokeAPI) commandMapb(args ...string) error {
 	url := "https://pokeapi.co/api/v2/location/"
 	if api.Previous != "" {
 		url = api.Previous
